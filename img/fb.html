@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+<meta charset="utf-8">
+<title>사천의 박자</title>
+<script language="JavaScript">
+    var SetTime = 216;		// 초 3분36초
+
+function msg_time() {	// 1초씩 카운트
+    
+    m = Math.floor(SetTime / 60) + "분 " + (SetTime % 60) + "초";	// 남은 시간 계산
+    
+    var msg = "  남은 시간 <font color='red'>" + m + "</font>";
+    
+    document.all.ViewTimer.innerHTML = msg;		// div 영역에 보여줌 
+            
+    SetTime--;					// 1초씩 감소
+    
+    if (SetTime < 0) {			// 시간이 종료 되었으면..
+        
+        clearInterval(tid);		// 타이머 해제
+        alert("끝~^^* 즐거우셨나요~^^");
+    }
+    
+}
+
+window.onload = function TimerStart(){ tid=setInterval('msg_time()',1000) };
+
+
+</script>
+</head>
+
+
+<body>
+    
+    <embed src="김연자-아모르파티.mp3" autostart="false" width="280" height="25" hidden="true">
+
+        <img src="춤1.png" alt="red"height="300" style="position: absolute; left: 310px; top: 10px">
+        
+       
+        <img src="1.png" alt="red"height="60"width="80" style="position: absolute; left: 20px; top: 500px">
+        <img src="2.png" alt="orange"height="60"width="80"style="position: absolute; left: 110px; top: 500px">
+        <img src="3.png" alt="yellow"height="60"width="80"style="position: absolute; left: 210px; top: 500px">
+        <img src="0.png" alt="rainbow"height="60"width="80"style="position: absolute; left: 310px; top: 500px"> 
+        <img src="5.png" alt="sky"height="60"width="80"style="position: absolute; left: 410px; top: 500px">
+        <img src="6.png" alt="blue"height="60"width="80"style="position: absolute; left: 510px; top: 500px">
+        <img src="7.png" alt="purple"height="60"width="80"style="position: absolute; left: 610px; top: 500px">
+        <img src="0.png" alt="rainbow"height="60"width="80"style="position: absolute; left: 710px; top: 500px"> 
+       
+         <img src="4.png" alt="green"height="60"width="80" style="position: absolute; left: 20px; top: 400px">
+        <img src="5.png" alt="sky"height="60"width="80"style="position: absolute; left: 110px; top: 400px">
+        <img src="3.png" alt="yellow"height="60"width="80"style="position: absolute; left: 410px; top: 400px">
+        <img src="5.png" alt="sky"height="60"width="80"style="position: absolute; left: 310px; top: 400px">
+         <img src="1.png" alt="red"height="60"width="80"style="position: absolute; left: 610px; top: 400px">
+        <img src="6.png" alt="blue"height="60"width="80"style="position: absolute; left: 510px; top: 400px">
+        <img src="7.png" alt="purple"height="60"width="80"style="position: absolute; left: 210px; top: 400px">
+        <img src="0.png" alt="rainbow"height="60"width="80"style="position: absolute; left: 710px; top: 400px"> 
+
+        <img src="1.png" alt="red"height="60"width="80" style="position: absolute; left: 20px; top: 300px">
+        <img src="0.png" alt="rainbow"height="60"width="80"style="position: absolute; left: 110px; top: 300px">
+         <img src="3.png" alt="yellow"height="60"width="80"style="position: absolute; left: 710px; top: 300px">
+        <img src="4.png" alt="green"height="60"width="80"style="position: absolute; left: 310px; top: 300px">
+        <img src="5.png" alt="sky"height="60"width="80"style="position: absolute; left: 410px; top: 300px">
+        <img src="2.png" alt="orange"height="60"width="80"style="position: absolute; left: 510px; top: 300px">
+        <img src="1.png" alt="red"height="60"width="80"style="position: absolute; left: 610px; top: 300px">
+        <img src="3.png" alt="yellow"height="60"width="80"style="position: absolute; left: 210px; top: 300px"> 
+
+
+        
+        
+        
+    <canvas id="canvas" width="800" height="600" style = "border : 1px dotted black; position: absolute; ">
+        <script src="fb.js"></script>
+            </canvas>
+            <div>   
+        
+                    <div id="ViewTimer"></div>  
+                </div>
+            
+             
+            
+         
+</body>
+</html> 

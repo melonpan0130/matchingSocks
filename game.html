@@ -1,0 +1,92 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>game</title>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    </head>
+    <script>
+        /*memo
+        나중에 jade로 table작성하기
+        */
+        $(function() {
+            // var socks = document.getElementsByClassName("socks");
+            var $socks = $(".socks");
+            console.log("socks");
+            console.log($socks);
+            for(var n in $socks)
+                $socks[n].src = "img/"+ parseInt(Math.random()*8) + ".png";
+            $(".socks:nth-child(n)").click(function() {
+                var number = $(".socks").index($(this));
+                console.log(number);
+                // 두개 클릭하고 같은지 비교
+                // 같으면 춤 바꾸기
+            });// click
+            
+            function selected (n) {
+                console.log(n+" is selected");
+            }   
+        });
+    </script>
+    <style>
+        table {
+            margin: 0 auto;
+            
+        }
+        table, th, td{
+            border: solid 1px red;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        
+        #dancing {
+            height: 30%;
+        }
+        
+        .socks {
+            height: 50%;
+            border: solid 1px black;
+        }
+    </style>
+    <body>
+        <table>
+            <tr>
+                <td colspan="8">
+                    <img id="dancing" src="img/dance1.png">
+                </td>
+            </tr>
+            <div id="socks">
+                <tr>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                </tr>
+                <tr>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                </tr>
+                <tr>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                    <td><img class="socks" ></td>
+                </tr>
+            </div>
+        </table>
+    </body>
+</html>
