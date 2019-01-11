@@ -9,28 +9,65 @@
         /*memo
         나중에 jade로 table작성하기
         */
+        var matching1, matching2;
         $(function() {
-            // var socks = document.getElementsByClassName("socks");
             var $socks = $(".socks");
-            console.log("socks");
-            console.log($socks);
+            // 랜덤으로 양말의 색깔을 바꿔줌
             for(var n in $socks)
                 $socks[n].src = "img/"+ parseInt(Math.random()*8) + ".png";
-            $(".socks:nth-child(n)").click(function() {
-                var number = $(".socks").index($(this));
-                console.log(number);
-                // 두개 클릭하고 같은지 비교
-                // 같으면 춤 바꾸기
-            });// click
             
-            function selected (n) {
-                console.log(n+" is selected");
+            // while(true) {
+                $(".socks:nth-child(n)").click(function() {
+                    var number = $(".socks").index($(this));
+                    // 두개 클릭하고 같은지 비교
+                    if(!matching1) {
+                        matching1 = number;
+                        console.log("matching1: "+number);
+                    }
+                    else {
+                        matching2 = number;
+                        console.log("matching2: "+number);
+                    }
+
+                    if(matching2) {
+                        if(selected(matching1, matching2)){
+                            // 새로운 배열 : 그 사진만 없는
+                            var otherImage, i=0;
+                            while(i<8){
+                                if(i==)
+                            }
+                            
+                            $socks[matching1].src = "img/"+ parseInt(Math.random()*7) + ".png";
+                            $socks[matching2].src = "img/"+ parseInt(Math.random()*7) + ".png";
+                            matching1 = null;
+                            matching2 = null;
+                        }
+                        
+                        
+                        
+                    }
+                    // 같으면 춤 바꾸기
+                });// click
+            // } // while
+            
+            function selected (a, b) {
+                console.log(a+" is selected");
+                console.log(b+" is selected");
+                var a_img = $(".socks").eq(a).attr('src');
+                var b_img = $(".socks").eq(b).attr('src');
+                console.log(a_img);
+                console.log(b_img);
+                if(a_img == b_img){
+                    console.log("match!");
+                    return true;
+                }
+                return false;
             }   
         });
     </script>
     <style>
         table {
-            margin: 0 auto;
+            margin: 50px auto;
             
         }
         table, th, td{
