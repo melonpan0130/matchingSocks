@@ -18,45 +18,60 @@
             
             // while(true) {
                 $(".socks:nth-child(n)").click(function() {
-                    var number = $(".socks").index($(this));
+                    var clicked = $(".socks").index($(this));
                     // 두개 클릭하고 같은지 비교
                     if(!matching1) {
-                        matching1 = number;
-                        console.log("matching1: "+number);
+                        matching1 = clicked;
+                        
+                    } else {
+                        matching2 = clicked;
                     }
-                    else {
-                        matching2 = number;
-                        console.log("matching2: "+number);
-                    }
-
+                    $(this).closest("td").addClass("checked");
+                    // console.log($(this).closest("td").css({"background-color":"green", "border-radius":"50px"}));
+                    
                     if(matching2) {
                         if(selected(matching1, matching2)){
-                            // 새로운 배열 : 그 사진만 없는
-                            var otherImage, i=0;
+                            // 그 사진만 없는 새로운 배열 otherImage,,
+                            // 이미지 번호 추출하기
+                            $(".socks").eq(matching1).attr('src')
+                            var matchingSocks = $(".socks").eq(matching1).attr('src').replace(/[^(0-9)]/gi, "");
+                            console.log("matched socks"+ matchingSocks);
+                            var otherImage = new Array(), i=0;
                             while(i<8){
-                                if(i==)
+                                if(i==matchingSocks);
+                                else otherImage.push(i+"");
+                                i++;
                             }
+                            console.log(otherImage);
+                            var othersocks = otherImage[parseInt(Math.random()*7)];
+                            $socks[matching1].src = "img/"+ othersocks + ".png";
+                            console.log("first othersocks : "+othersocks);
                             
-                            $socks[matching1].src = "img/"+ parseInt(Math.random()*7) + ".png";
-                            $socks[matching2].src = "img/"+ parseInt(Math.random()*7) + ".png";
-                            matching1 = null;
-                            matching2 = null;
-                        }
+                            // delete first othersocks
+                            otherImage.splice(otherImage.indexOf(othersocks), 1);
+                            
+                            console.log("changed otherImage array : ");
+                            console.log(otherImage);
+                            othersocks = otherImage[parseInt(Math.random()*6)];
+                            $socks[matching2].src = "img/"+ othersocks + ".png";
+                            console.log("seconds othersocks : "+othersocks);
+                        } // if
+                        console.log("change background-colors")
+                        $(".socks").eq(matching1).css({"background-color":"whilte", "border-radious":"50px"});
+                        $(".socks").eq(matching2).css({"background-color":"whilte", "border-radious":"50px"});
+                        $(".socks").eq(matching1).addClass("")
+                        matching1 = null;
+                        matching2 = null;
                         
-                        
-                        
+                        console.log("reset");
                     }
                     // 같으면 춤 바꾸기
                 });// click
             // } // while
             
             function selected (a, b) {
-                console.log(a+" is selected");
-                console.log(b+" is selected");
                 var a_img = $(".socks").eq(a).attr('src');
                 var b_img = $(".socks").eq(b).attr('src');
-                console.log(a_img);
-                console.log(b_img);
                 if(a_img == b_img){
                     console.log("match!");
                     return true;
@@ -68,7 +83,6 @@
     <style>
         table {
             margin: 50px auto;
-            
         }
         table, th, td{
             border: solid 1px red;
@@ -83,47 +97,66 @@
         .socks {
             height: 50%;
             border: solid 1px black;
+            margin-bottom: 15px;
+            margin-right: 15px;
+            border: 1px solid green;
+        }
+        img:hover {
+            // transition: width 2s, height 4s;
+        }
+        .checked {
+            background-color: yellowgreen; 
+            border-radius: 50px;
+        }
+        .dance~tr td div{
+            // width: 0px;
+            // -webkit-transition:border-width 2s;
+            height: 100%;
+            width: 100%;
+            background-color: yellowgreen; 
+            border-radius: 50px;
+        }
+        .dance~tr td :hover{
+            border-width: 100%;
         }
     </style>
     <body>
         <table>
-            <tr>
+            <tr class="dance">
                 <td colspan="8">
                     <img id="dancing" src="img/dance1.png">
                 </td>
             </tr>
-            <div id="socks">
-                <tr>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                </tr>
-                <tr>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                </tr>
-                <tr>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                    <td><img class="socks" ></td>
-                </tr>
-            </div>
+            <tr>
+                <td><div><img class="socks" ></div></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+            </tr>
+            <tr>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+            </tr>
+            <tr>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+                <td><img class="socks" ></td>
+            </tr>
         </table>
     </body>
 </html>
