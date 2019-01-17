@@ -9,6 +9,7 @@
         /*memo
         나중에 jade로 table작성하기
         */
+        var danceNum = 0;
         var matching1, matching2;
         $(function() {
             var $socks = $(".socks");
@@ -22,14 +23,15 @@
                     // 두개 클릭하고 같은지 비교
                     if(!matching1) {
                         matching1 = clicked;
-                        
+                        console.log("clicked");
                     } else {
                         matching2 = clicked;
+                        console.log("clicked");
                     }
                     $(this).closest("td").addClass("checked");
-                    // console.log($(this).closest("td").css({"background-color":"green", "border-radius":"50px"}));
                     
-                    if(matching2) {
+                    if(matching2 && (matching1 != matching2)) {
+                        // 같을 경우
                         if(selected(matching1, matching2)){
                             // 그 사진만 없는 새로운 배열 otherImage,,
                             // 이미지 번호 추출하기
@@ -55,11 +57,12 @@
                             othersocks = otherImage[parseInt(Math.random()*6)];
                             $socks[matching2].src = "img/"+ othersocks + ".png";
                             console.log("seconds othersocks : "+othersocks);
+                            console.log("change dancing");
+                            var a = (++danceNum)%5 + 1;
+                            console.log("src", "img/dance"+a+".png");
+                            $("#dancing").attr("src", "img/dance"+a+".png");
                         } // if
-                        console.log("change background-colors")
-                        $(".socks").eq(matching1).css({"background-color":"whilte", "border-radious":"50px"});
-                        $(".socks").eq(matching2).css({"background-color":"whilte", "border-radious":"50px"});
-                        $(".socks").eq(matching1).addClass("")
+                        console.log("removeClass"); $(".socks").eq(matching1).closest("td").removeClass("checked"); $(".socks").eq(matching2).closest("td").removeClass("checked");
                         matching1 = null;
                         matching2 = null;
                         
@@ -92,6 +95,7 @@
         
         #dancing {
             height: 30%;
+            height: 300px;
         }
         
         .socks {
@@ -108,7 +112,8 @@
             background-color: yellowgreen; 
             border-radius: 50px;
         }
-        .dance~tr td div{
+        /*
+        .dance~tr td div {
             // width: 0px;
             // -webkit-transition:border-width 2s;
             height: 100%;
@@ -118,7 +123,7 @@
         }
         .dance~tr td :hover{
             border-width: 100%;
-        }
+        }*/
     </style>
     <body>
         <table>
@@ -128,7 +133,7 @@
                 </td>
             </tr>
             <tr>
-                <td><div><img class="socks" ></div></td>
+                <td><img class="socks" ></td>
                 <td><img class="socks" ></td>
                 <td><img class="socks" ></td>
                 <td><img class="socks" ></td>
