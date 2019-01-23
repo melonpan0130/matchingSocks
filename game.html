@@ -6,82 +6,106 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     </head>
     <script>
-        /*memo
-        나중에 jade로 table작성하기
-        */
-        var danceNum = 0;
-        var matching1, matching2;
-        $(function() {
-            var $socks = $(".socks");
-            // 랜덤으로 양말의 색깔을 바꿔줌
-            for(var n in $socks)
-                $socks[n].src = "img/"+ parseInt(Math.random()*8) + ".png";
-            
-            // while(true) {
-                $(".socks:nth-child(n)").click(function() {
-                    var clicked = $(".socks").index($(this));
-                    // 두개 클릭하고 같은지 비교
-                    if(!matching1) {
-                        matching1 = clicked;
-                        console.log("clicked");
-                    } else {
-                        matching2 = clicked;
-                        console.log("clicked");
-                    }
-                    $(this).closest("td").addClass("checked");
-                    
-                    if(matching2 && (matching1 != matching2)) {
-                        // 같을 경우
-                        if(selected(matching1, matching2)){
-                            // 그 사진만 없는 새로운 배열 otherImage,,
-                            // 이미지 번호 추출하기
-                            $(".socks").eq(matching1).attr('src')
-                            var matchingSocks = $(".socks").eq(matching1).attr('src').replace(/[^(0-9)]/gi, "");
-                            console.log("matched socks"+ matchingSocks);
-                            var otherImage = new Array(), i=0;
-                            while(i<8){
-                                if(i==matchingSocks);
-                                else otherImage.push(i+"");
-                                i++;
-                            }
-                            console.log(otherImage);
-                            var othersocks = otherImage[parseInt(Math.random()*7)];
-                            $socks[matching1].src = "img/"+ othersocks + ".png";
-                            console.log("first othersocks : "+othersocks);
-                            
-                            // delete first othersocks
-                            otherImage.splice(otherImage.indexOf(othersocks), 1);
-                            
-                            console.log("changed otherImage array : ");
-                            console.log(otherImage);
-                            othersocks = otherImage[parseInt(Math.random()*6)];
-                            $socks[matching2].src = "img/"+ othersocks + ".png";
-                            console.log("seconds othersocks : "+othersocks);
-                            console.log("change dancing");
-                            var a = (++danceNum)%5 + 1;
-                            console.log("src", "img/dance"+a+".png");
-                            $("#dancing").attr("src", "img/dance"+a+".png");
-                        } // if
-                        console.log("removeClass"); $(".socks").eq(matching1).closest("td").removeClass("checked"); $(".socks").eq(matching2).closest("td").removeClass("checked");
-                        matching1 = null;
-                        matching2 = null;
-                        
-                        console.log("reset");
-                    }
-                    // 같으면 춤 바꾸기
-                });// click
-            // } // while
-            
-            function selected (a, b) {
-                var a_img = $(".socks").eq(a).attr('src');
-                var b_img = $(".socks").eq(b).attr('src');
-                if(a_img == b_img){
-                    console.log("match!");
-                    return true;
+var danceNum = 0;
+var matching1, matching2;
+$(function() {
+    var $socks = $(".socks");
+    // 랜덤으로 양말의 색깔을 바꿔줌
+    for(var n in $socks)
+        $socks[n].src = "img/"+ parseInt(Math.random()*8) + ".png";
+
+    $(".socks:nth-child(n)").click(function() {
+        var clicked = $(".socks").index($(this));
+        // 두개 클릭하고 같은지 비교
+        if(!matching1) {
+            matching1 = clicked;
+            console.log("clicked1 : " + matching1);
+            console.log("matching2 : "+matching2);
+        } else {
+            matching2 = clicked;
+            console.log("clicked2 : " + (matching2 == undefined);
+        }
+        // 형제 객체인 div를 사용하여 선택 표시를 줌
+        $(this).next("div").animate({
+            left: '0',
+            top: '0',
+            width: '100%',
+            height: '100%'
+        }, 200);
+        console.log("animate");
+        console.log("before if");
+        console.log("matching2 : "+Boolean(matching2));
+        if(matching2 && (matching1 != matching2)) {
+            console.log("if other socks : "+(matching2 && (matching1 != matching2)));
+            // 같을 경우
+            if(selected(matching1, matching2)){
+                // 그 사진만 없는 새로운 배열 otherImage,,
+                // 이미지 번호 추출하기
+                $(".socks").eq(matching1).attr('src')
+                var matchingSocks = $(".socks").eq(matching1).attr('src').replace(/[^(0-9)]/gi, "");
+                console.log("matched socks"+ matchingSocks);
+                var otherImage = new Array(), i=0;
+                while(i<8){
+                    if(i==matchingSocks);
+                    else otherImage.push(i+"");
+                    i++;
                 }
-                return false;
-            }   
-        });
+                console.log(otherImage);
+                var othersocks = otherImage[parseInt(Math.random()*7)];
+                $socks[matching1].src = "img/"+ othersocks + ".png";
+                console.log("first othersocks : "+othersocks);
+
+                // delete first othersocks
+                otherImage.splice(otherImage.indexOf(othersocks), 1);
+
+                console.log("changed otherImage array : ");
+                console.log(otherImage);
+                othersocks = otherImage[parseInt(Math.random()*6)];
+                $socks[matching2].src = "img/"+ othersocks + ".png";
+                console.log("seconds othersocks : "+othersocks);
+                console.log("change dancing");
+                var a = (++danceNum)%5 + 1;
+                console.log("src", "img/dance"+a+".png");
+                $("#dancing").attr("src", "img/dance"+a+".png");
+            } // if
+            setTimeout(resetAnimate(), 3000);
+
+            console.log("reset animate")
+
+            matching1 = null;
+            matching2 = null;
+
+            console.log("reset");
+        }
+        // 같으면 춤 바꾸기
+    });// click
+
+    function selected (a, b) {
+        var a_img = $(".socks").eq(a).attr('src');
+        var b_img = $(".socks").eq(b).attr('src');
+        if(a_img == b_img){
+            console.log("match!");
+            return true;
+        }
+        return false;
+    }
+
+    function resetAnimate() {
+        $(".socks").eq(matching1).next("div").animate({
+            left: '52',
+            top: '49',
+            width: '0%',
+            height: '0%'
+        }, 200);
+        $(".socks").eq(matching2).next("div").animate({
+            left: '52',
+            top: '49',
+            width: '0%',
+            height: '0%'
+        }, 200);
+    }
+}); // init
+
     </script>
     <style>
         table {
@@ -105,22 +129,36 @@
             margin-right: 15px;
             border: 1px solid green;
         }
-        img:hover {
-            // transition: width 2s, height 4s;
-        }
         .checked {
             background-color: yellowgreen; 
             border-radius: 50px;
         }
-        /*
-        .dance~tr td div {
-            // width: 0px;
-            // -webkit-transition:border-width 2s;
-            height: 100%;
-            width: 100%;
+        .dance~tr td {
+            position: relative;
+        }
+        .dance~tr td img {
+            /*display: block;
+            position: absolute;
+            top: 0;
+            left: 0;*/
+            z-index: 2;
+            position: relative;
+        }
+        .dance~tr td div{
+            /* -webkit-transition:border-width 2s;*/
+            
+            height: 0%;
+            width: 0%;
+            top: 49;
+            left: 52;
+            margin: 0 auto;
+            display: inline;
+            position: absolute;
             background-color: yellowgreen; 
             border-radius: 50px;
+            z-index: 1;
         }
+        /*
         .dance~tr td :hover{
             border-width: 100%;
         }*/
@@ -133,14 +171,14 @@
                 </td>
             </tr>
             <tr>
-                <td><img class="socks" ></td>
-                <td><img class="socks" ></td>
-                <td><img class="socks" ></td>
-                <td><img class="socks" ></td>
-                <td><img class="socks" ></td>
-                <td><img class="socks" ></td>
-                <td><img class="socks" ></td>
-                <td><img class="socks" ></td>
+                <td><img class="socks" ><div></div></td>
+                <td><img class="socks" ><div></div></td>
+                <td><img class="socks" ><div></div></td>
+                <td><img class="socks" ><div></div></td>
+                <td><img class="socks" ><div></div></td>
+                <td><img class="socks" ><div></div></td>
+                <td><img class="socks" ><div></div></td>
+                <td><img class="socks" ><div></div></td>
             </tr>
             <tr>
                 <td><img class="socks" ></td>
