@@ -1,7 +1,7 @@
 <html>
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>game</title>
+        <title>test</title>
         <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
         <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
     </head>
@@ -53,21 +53,29 @@ $(function() {
                 var nextDance = (++danceNum)%5 + 1;
                 $("#dancing").attr("src", "img/dance"+nextDance+".png");
             } // if
-            
-            //reset animate and data
             resetAnimate();
 
             matching1 = null;
             matching2 = null;
+            
         }
+        console.log("click");
+        console.log("end ==================================================");
 
     });// click    
 }); // init
 
+function clicked () {
+    
+}
+
 function selected (a, b) {
     var a_img = $(".socks").eq(a).attr('src');
     var b_img = $(".socks").eq(b).attr('src');
-    if(a_img == b_img) return true;
+    if(a_img == b_img){
+        console.log("match!");
+        return true;
+    }
     return false;
 }
 
@@ -89,6 +97,8 @@ function resetAnimate() {
             height: '0%'
         }, 200);        
     });
+    
+    console.log("reset animate1");
 }
     </script>
     <style>
