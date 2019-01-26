@@ -38,9 +38,11 @@ $(function() {
             // if they are same socks, change the other socks
             if(selected(matching1, matching2)){
                 var matchingSocks = $(".socks").eq(matching1).attr('src').replace(/[^(0-9)]/gi, ""); // search the number of same image
-                console.log(matchingSocks);
+                
+                // increase score
                 if(matchingSocks == 0) scoreNum += 10;
                 else scoreNum += 5;
+                
                 var otherImage = new Array(), i=0;
                 while(i<8){
                     if(i==matchingSocks);
@@ -63,6 +65,13 @@ $(function() {
             
             //reset animate and data
             resetAnimate();
+            console.log($(".socks").eq(matching1));
+            $.when($(".socks").eq(matching1), $(".socks").eq(matching2)).then(function() {
+                console.log("delete spin")
+                $(".socks").eq(matching1).toggleClass('spin');
+                $(".socks").eq(matching2).removeClass('spin'); 
+            });
+
             $score.text(scoreNum);
 
             matching1 = null;
@@ -87,7 +96,7 @@ function resetAnimate() {
             left: '52',
             top: '49',
             width: '0%',
-            height: '0%'
+            height: '0%',
         }, 200);
 
         $resetAni2.animate({
@@ -96,9 +105,9 @@ function resetAnimate() {
             width: '0%',
             height: '0%'
         }, 200);
-        
-        
     });
+    $(".socks").eq(matching1).addClass('spin');
+    $(".socks").eq(matching2).addClass('spin');
 }
     </script>
     <style>
@@ -121,27 +130,33 @@ function resetAnimate() {
         }
         
         .socks {
-            height: 50%;
+            height: 85%;
             border: solid 1px black;
             margin-bottom: 15px;
             margin-right: 15px;
             border: 1px solid green;
+            transition: all ease 1s;
+            z-index: 2;
+            position: relative;
         }
+        .spin {
+            transform: rotate(720deg);
+        }
+        /*
+        .socks:hover {
+            transform: rotate(720deg);
+        }*/
         .checked {
             background-color: yellowgreen; 
             border-radius: 50px;
         }
+        
         .dance~tr td {
             position: relative;
+            width: 104.8;
+            height: 98.4;
         }
-        .dance~tr td img {
-            /*display: block;
-            position: absolute;
-            top: 0;
-            left: 0;*/
-            z-index: 2;
-            position: relative;
-        }
+        
         .dance~tr td div{
             height: 0%;
             width: 0%;
@@ -192,7 +207,8 @@ function resetAnimate() {
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
-            </tr><tr>
+            </tr>
+            <tr>
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
@@ -201,7 +217,8 @@ function resetAnimate() {
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
-            </tr><tr>
+            </tr>
+            <tr>
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
                 <td><img class="socks" ><div></div></td>
