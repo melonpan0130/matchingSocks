@@ -8,9 +8,13 @@
     <script>
 var danceNum = 0;
 var matching1, matching2;
+
 $(function() {
     var $socks = $(".socks");
-
+    var $score = $("#score h3");
+    var scoreNum = parseInt($score.text()); // 0
+    
+    
     for(var n in $socks) // change the socks by random
         $socks[n].src = "img/"+ parseInt(Math.random()*8) + ".png";
 
@@ -34,6 +38,9 @@ $(function() {
             // if they are same socks, change the other socks
             if(selected(matching1, matching2)){
                 var matchingSocks = $(".socks").eq(matching1).attr('src').replace(/[^(0-9)]/gi, ""); // search the number of same image
+                console.log(matchingSocks);
+                if(matchingSocks == 0) scoreNum += 10;
+                else scoreNum += 5;
                 var otherImage = new Array(), i=0;
                 while(i<8){
                     if(i==matchingSocks);
@@ -56,6 +63,7 @@ $(function() {
             
             //reset animate and data
             resetAnimate();
+            $score.text(scoreNum);
 
             matching1 = null;
             matching2 = null;
@@ -87,11 +95,16 @@ function resetAnimate() {
             top: '49',
             width: '0%',
             height: '0%'
-        }, 200);        
+        }, 200);
+        
+        
     });
 }
     </script>
     <style>
+        body {
+            background-color: antiquewhite;
+        }
         table {
             margin: 50px auto;
         }
@@ -130,8 +143,6 @@ function resetAnimate() {
             position: relative;
         }
         .dance~tr td div{
-            /* -webkit-transition:border-width 2s;*/
-            
             height: 0%;
             width: 0%;
             top: 49;
@@ -143,12 +154,29 @@ function resetAnimate() {
             border-radius: 50px;
             z-index: 1;
         }
-        /*
-        .dance~tr td :hover{
-            border-width: 100%;
-        }*/
+        
+        #score {
+            position: fixed;
+            top: 50px;
+            right: 50px;
+            width: 100px;
+            height: 100px;
+            padding: 10px;
+            text-align: center;
+            background-color: coral;
+            border-radius: 25px;
+        }
+        
+        .stars {
+            display: none;
+        }
     </style>
     <body>
+        <div id="score">
+            <p>SCORE</p>
+            <h3>0</h3>
+        </div>
+        <img class="stars" src="img/star.png">
         <table>
             <tr class="dance">
                 <td colspan="8">
