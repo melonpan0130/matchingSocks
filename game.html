@@ -67,9 +67,17 @@ $(function() {
             resetAnimate();
 
             $score.text(scoreNum);
-
+            
+            //  $(".socks").eq(matching1).css('rotate', '0deg');
+            
+            /*
+            for(var i=0; i<$socks.length; i++) {
+                $(".socks").eq(i).
+            }*/
+            
             matching1 = null;
             matching2 = null;
+            
         }
 
     });// click    
@@ -85,15 +93,17 @@ function selected (a, b) {
 function resetAnimate() {
     var $resetAni1 = $(".socks").eq(matching1);
     var $resetAni2 = $(".socks").eq(matching2);
-    // $resetAni1.css('transform', 'rotate(720deg)');
     
-    // $resetAni1.rotate({animateTo:720});
-    $resetAni1.animate({
-        transform: '720deg'
-    });
+    // 1. 각도 값 가져오기
+    // 2. 값 += 720 하기
+    // 3. rotate에 값 대입하기
+    // rotate =+ 720;
+    $resetAni1.animate({rotate: '+=720deg'}, 200);
+    //$resetAni2.animate({rotate: '+=720deg'});
+    console.log($resetAni1.css('rotate'));
 
+    
     $.when($resetAni1.next("div"), $resetAni2.next("div")).then(function() {
-
         // circle
         $resetAni1.next("div").animate({
             left: '52',
@@ -107,13 +117,10 @@ function resetAnimate() {
             top: '49',
             width: '0%',
             height: '0%'
-        }, 200);
+        }, 200);        
     });
-    var $trans1 = $resetAni1.css('transform');
 
-    console.log($trans1);
-
-}
+}// function 
     </script>
     <style>
         body {
