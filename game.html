@@ -8,6 +8,8 @@
     <script>
 var danceNum = 0;
 var matching1, matching2;
+var rotate = []; // rotate socks when changed
+
 
 $(function() {
     var $socks = $(".socks");
@@ -17,6 +19,9 @@ $(function() {
     
     for(var n in $socks) // change the socks by random
         $socks[n].src = "img/"+ parseInt(Math.random()*8) + ".png";
+    
+    for(var i=0; i<24; i++) // rotate Initialization 
+        rotate.push(0);
 
     $(".socks:nth-child(n)").click(function() {
         var clicked = $(".socks").index($(this));
@@ -97,11 +102,12 @@ function resetAnimate() {
     // 1. 각도 값 가져오기
     // 2. 값 += 720 하기
     // 3. rotate에 값 대입하기
-    // rotate =+ 720;
-    $resetAni1.animate({rotate: '+=720deg'}, 200);
-    //$resetAni2.animate({rotate: '+=720deg'});
-    console.log($resetAni1.css('rotate'));
 
+    rotate[matching1] += 720;
+    rotate[matching2] += 720;
+    
+    $resetAni1.css("transform" , 'rotate('+rotate[matching1]+'deg)');
+    $resetAni2.css("transform" , 'rotate('+rotate[matching2]+'deg)');
     
     $.when($resetAni1.next("div"), $resetAni2.next("div")).then(function() {
         // circle
@@ -124,7 +130,7 @@ function resetAnimate() {
     </script>
     <style>
         body {
-            background-color: antiquewhite;
+            /*background-color: antiquewhite;*/
         }
         table {
             margin: 50px auto;
